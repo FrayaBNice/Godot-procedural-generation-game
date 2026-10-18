@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dcwi4hfli225"]
+
+[ext_resource type="Script" uid="uid://cm7imj7a2lioq" path="res://room.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://c8jai25s8pi1f" path="res://room_generation.gd" id="2_h2yge"]
+
+[node name="Main" type="Node" unique_id=241667543]
+
+[node name="UI" type="Control" parent="." unique_id=2104449091]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="World" type="Node" parent="." unique_id=1941272318]
+
+[node name="Room" type="Node3D" parent="World" unique_id=1891126630]
+script = ExtResource("1_0xm2m")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="World" unique_id=790213535]
+
+[node name="RoomGeneration" type="Node" parent="World" unique_id=300497925]
+script = ExtResource("2_h2yge")
