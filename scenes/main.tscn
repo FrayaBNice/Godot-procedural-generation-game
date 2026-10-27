@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcwi4hfli225"]
 
-[ext_resource type="Script" uid="uid://cm7imj7a2lioq" path="res://source/room/room.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://cm7imj7a2lioq" path="res://assets/scripts/room/room.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://dh8v00nh02l1" path="res://scenes/player/player_controller.tscn" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://c8jai25s8pi1f" path="res://source/room/room_generation.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://c8jai25s8pi1f" path="res://assets/scripts/room/room_generation.gd" id="3_tbgi4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hjv3p"]
 size = Vector2(20, 20)
@@ -10,8 +10,29 @@ size = Vector2(20, 20)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0xm2m"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_hjv3p"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sugp2"]
+height = 10.0
+radius = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_dgty8"]
+size = Vector3(1, 6.1436768, 13.605469)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyhfs"]
+size = Vector3(1, 6.1436768, 13.605469)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cv1cy"]
+
+[sub_resource type="Sky" id="Sky_wpncg"]
+sky_material = SubResource("ProceduralSkyMaterial_cv1cy")
+
 [sub_resource type="Environment" id="Environment_hjv3p"]
-background_mode = 1
+background_mode = 2
+sky = SubResource("Sky_wpncg")
 
 [node name="Main" type="Node" unique_id=241667543]
 
@@ -34,6 +55,24 @@ mesh = SubResource("PlaneMesh_hjv3p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D/StaticBody3D" unique_id=800955850]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/Room" unique_id=522342227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6191473, 0, 5.5289855)
+mesh = SubResource("CylinderMesh_hjv3p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D2" unique_id=417926053]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D2/StaticBody3D" unique_id=748362464]
+shape = SubResource("CylinderShape3D_sugp2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/Room" unique_id=290106625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8792086, 2.5718384, 0)
+mesh = SubResource("BoxMesh_dgty8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D3" unique_id=886839877]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D3/StaticBody3D" unique_id=143042470]
+shape = SubResource("BoxShape3D_jyhfs")
+
 [node name="RoomGeneration" type="Node" parent="World" unique_id=300497925]
 script = ExtResource("3_tbgi4")
 
@@ -41,7 +80,7 @@ script = ExtResource("3_tbgi4")
 environment = SubResource("Environment_hjv3p")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment" unique_id=1949734133]
-transform = Transform3D(1, 0, 0, 0, 0.610886, 0.79171854, 0, -0.79171854, 0.610886, 0, 5.8840313, 7.6890574)
+transform = Transform3D(0.6239317, -0.61871135, 0.47739452, 1.7763568e-15, 0.610886, 0.79171854, -0.7814788, -0.4939783, 0.38115114, 7.9737244, 5.8840313, 7.6890574)
 
 [node name="PlayerController" parent="World" unique_id=700695757 instance=ExtResource("2_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
