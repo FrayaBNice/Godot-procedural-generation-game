@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcwi4hfli225"]
 
-[ext_resource type="Script" uid="uid://cm7imj7a2lioq" path="res://assets/scripts/room/room.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c1s3u6ow1wnu4" path="res://scenes/dungeon/dungeon.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dh8v00nh02l1" path="res://scenes/player/player_controller.tscn" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://c8jai25s8pi1f" path="res://assets/scripts/room/room_generation.gd" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://gt6xvoj2mc23" path="res://scenes/UI/user_interface.tscn" id="3_sugp2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hjv3p"]
 size = Vector2(20, 20)
@@ -36,51 +36,49 @@ sky = SubResource("Sky_wpncg")
 
 [node name="Main" type="Node" unique_id=241667543]
 
-[node name="UI" type="Control" parent="." unique_id=2104449091]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Managers" type="Node" parent="." unique_id=632778016]
 
-[node name="World" type="Node" parent="." unique_id=1941272318]
+[node name="GameManager" type="Node" parent="Managers" unique_id=2126540789]
 
-[node name="Room" type="Node3D" parent="World" unique_id=1891126630]
-script = ExtResource("1_sugp2")
+[node name="CurrentLevel" type="Node3D" parent="." unique_id=151068404]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Room" unique_id=1750860653]
+[node name="TestingSpace" type="Node3D" parent="CurrentLevel" unique_id=1891126630]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurrentLevel/TestingSpace" unique_id=1750860653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("PlaneMesh_hjv3p")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D" unique_id=1495601243]
+[node name="StaticBody3D" type="StaticBody3D" parent="CurrentLevel/TestingSpace/MeshInstance3D" unique_id=1495601243]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D/StaticBody3D" unique_id=800955850]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurrentLevel/TestingSpace/MeshInstance3D/StaticBody3D" unique_id=800955850]
 shape = SubResource("ConcavePolygonShape3D_0xm2m")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/Room" unique_id=522342227]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6191473, 0, 5.5289855)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CurrentLevel/TestingSpace" unique_id=522342227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6191473, -1, 5.5289855)
 mesh = SubResource("CylinderMesh_hjv3p")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D2" unique_id=417926053]
+[node name="StaticBody3D" type="StaticBody3D" parent="CurrentLevel/TestingSpace/MeshInstance3D2" unique_id=417926053]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D2/StaticBody3D" unique_id=748362464]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurrentLevel/TestingSpace/MeshInstance3D2/StaticBody3D" unique_id=748362464]
 shape = SubResource("CylinderShape3D_sugp2")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/Room" unique_id=290106625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8792086, 2.5718384, 0)
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CurrentLevel/TestingSpace" unique_id=290106625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8792086, 1.5718384, 0)
 mesh = SubResource("BoxMesh_dgty8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D3" unique_id=886839877]
+[node name="StaticBody3D" type="StaticBody3D" parent="CurrentLevel/TestingSpace/MeshInstance3D3" unique_id=886839877]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D3/StaticBody3D" unique_id=143042470]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurrentLevel/TestingSpace/MeshInstance3D3/StaticBody3D" unique_id=143042470]
 shape = SubResource("BoxShape3D_jyhfs")
 
-[node name="RoomGeneration" type="Node" parent="World" unique_id=300497925]
-script = ExtResource("3_tbgi4")
+[node name="Dungeon" parent="CurrentLevel" unique_id=852877014 instance=ExtResource("2_0wfyh")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=1502174852]
+[node name="PlayerController" parent="CurrentLevel" unique_id=700695757 instance=ExtResource("2_jyhfs")]
+
+[node name="UserInterface" parent="." unique_id=1467162206 instance=ExtResource("3_sugp2")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1502174852]
 environment = SubResource("Environment_hjv3p")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment" unique_id=1949734133]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1949734133]
 transform = Transform3D(0.6239317, -0.61871135, 0.47739452, 1.7763568e-15, 0.610886, 0.79171854, -0.7814788, -0.4939783, 0.38115114, 7.9737244, 5.8840313, 7.6890574)
-
-[node name="PlayerController" parent="World" unique_id=700695757 instance=ExtResource("2_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
