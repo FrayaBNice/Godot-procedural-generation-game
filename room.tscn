@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cwrbtih8bhqcm"]
+
+[ext_resource type="Script" uid="uid://y0d4npvf3s1n" path="res://dungeon_generation.gd" id="1_88gup"]
+
+[node name="Room" type="Node3D" unique_id=169722193]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=417174827]
+script = ExtResource("1_88gup")
