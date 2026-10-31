@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://c3ovfid3xb7la"]
+
+[ext_resource type="Script" uid="uid://bfd38rkhtai68" path="res://assets/weapons/scripts/weapon.gd" id="1_5kld3"]
+[ext_resource type="PackedScene" uid="uid://cqoag8vhl6ib4" path="res://scenes/weapon/machine_gun_weapon.tscn" id="2_odw0a"]
+
+[resource]
+script = ExtResource("1_5kld3")
+weapon_name = "MachineGun"
+damage = 6.0
+max_ammo = 200
+fire_rate = 8.0
+is_automatic = true
+accuracy = 80
+projectile_speed = 0.0
+weapon_model = ExtResource("2_odw0a")
+metadata/_custom_type_script = "uid://bfd38rkhtai68"

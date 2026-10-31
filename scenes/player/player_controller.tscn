@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_ers80"]
 [ext_resource type="Script" uid="uid://44wlrx2l1m21" path="res://assets/scripts/player/components/mouse_capture.gd" id="6_kqh78"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_nwn0c"]
+[ext_resource type="PackedScene" uid="uid://467fnipfjlg8" path="res://scenes/weapon/pistol_weapon.tscn" id="6_oal2v"]
 [ext_resource type="Script" uid="uid://075w5vjcescp" path="res://assets/weapons/scripts/weapon_controller.gd" id="7_0l0yx"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_y4pjd"]
-[ext_resource type="Resource" uid="uid://hn85vvxvqtlc" path="res://assets/weapons/resources/pistol.tres" id="8_3nb03"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_mxnws"]
 [ext_resource type="Script" uid="uid://cqrpha4131qgx" path="res://assets/scripts/player/components/state_machine.gd" id="9_3y0ka"]
 [ext_resource type="Script" uid="uid://yeyejbcbr1da" path="res://assets/scripts/player/states/base_state.gd" id="10_nwn0c"]
@@ -30,9 +30,12 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4q5nu"]
 
-[node name="PlayerController" type="CharacterBody3D" unique_id=1834255244 node_paths=PackedStringArray("camera", "state_chart", "standing_collision", "interaction_raycast")]
+[node name="PlayerController" type="CharacterBody3D" unique_id=1834255244 node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "interaction_raycast")]
+collision_layer = 3
 script = ExtResource("1_0cfoe")
 camera = NodePath("CameraController")
+camera_effects = NodePath("CameraController/Camera3D")
+weapon_controller = NodePath("Components/WeaponController")
 state_chart = NodePath("StateChart")
 standing_collision = NodePath("StandingCollision")
 interaction_raycast = NodePath("CameraController/Camera3D/InteractionRaycast")
@@ -45,7 +48,7 @@ offset_right = 372.0
 offset_bottom = 536.0
 grow_horizontal = 1
 grow_vertical = 1
-initial_node_to_watch = NodePath("../WeaponStateChart")
+initial_node_to_watch = NodePath("../StateChart")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=92505442]
 mesh = SubResource("CapsuleMesh_ev2gv")
@@ -69,15 +72,19 @@ target_position = Vector3(0, 0, -3)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 script = ExtResource("4_cv1cy")
 
+[node name="HIDE" parent="CameraController/Camera3D" unique_id=852109313 instance=ExtResource("6_oal2v")]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0, -0.245, -0.485)
+visible = false
+
 [node name="Components" type="Node" parent="." unique_id=1137230534]
 
 [node name="MouseCapture" type="Node" parent="Components" unique_id=2116454220]
 script = ExtResource("6_kqh78")
 
-[node name="WeaponController" type="Node" parent="Components" unique_id=372920067 node_paths=PackedStringArray("camera", "weapon_model_parent", "weapon_state_chart")]
+[node name="WeaponController" type="Node" parent="Components" unique_id=372920067 node_paths=PackedStringArray("player", "camera", "weapon_model_parent", "weapon_state_chart")]
 script = ExtResource("7_0l0yx")
+player = NodePath("../..")
 camera = NodePath("../../CameraController/Camera3D")
-current_weapon = ExtResource("8_3nb03")
 weapon_model_parent = NodePath("../../CameraController/Camera3D")
 weapon_state_chart = NodePath("../../WeaponStateChart")
 
@@ -151,7 +158,7 @@ to = NodePath("../../Grounded")
 event = &"onGrounded"
 delay_in_seconds = "0.0"
 
-[node name="StateMachine" type="Node" parent="." unique_id=1493923468 node_paths=PackedStringArray("player_controller")]
+[node name="StateMachine" type="Node" parent="." unique_id=1493923468 node_paths=PackedStringArray("player_controller") groups=["player"]]
 unique_name_in_owner = true
 script = ExtResource("9_3y0ka")
 player_controller = NodePath("..")

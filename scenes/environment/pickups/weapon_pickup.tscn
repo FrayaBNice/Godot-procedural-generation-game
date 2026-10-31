@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ckhtu0jf7k7ai"]
+
+[ext_resource type="PackedScene" uid="uid://gtou8xy5h1q5" path="res://scenes/environment/pickups/pickup_base.tscn" id="1_urris"]
+[ext_resource type="Script" uid="uid://de37gsxqqrulr" path="res://assets/scripts/environment/pickups/weapon_pickup.gd" id="2_6c8sy"]
+[ext_resource type="Script" uid="uid://bfd38rkhtai68" path="res://assets/weapons/scripts/weapon.gd" id="3_eisos"]
+
+[sub_resource type="Resource" id="Resource_2xfig"]
+script = ExtResource("3_eisos")
+metadata/_custom_type_script = "uid://bfd38rkhtai68"
+
+[sub_resource type="SphereMesh" id="SphereMesh_bp42o"]
+radius = 0.25
+height = 0.5
+
+[node name="WeaponPickup" unique_id=2075187270 instance=ExtResource("1_urris")]
+script = ExtResource("2_6c8sy")
+weapon_slot = 1
+weapon_resource = SubResource("Resource_2xfig")
+
+[node name="MeshInstance3D" parent="." index="1" unique_id=624650306]
+mesh = SubResource("SphereMesh_bp42o")

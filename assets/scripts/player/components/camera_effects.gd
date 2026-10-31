@@ -132,3 +132,7 @@ func update_screen_shake(alpha : float, amount : float) -> void:
 	var current_shake_amount = amount * (1.0 - alpha)
 	h_offset = randf_range(-current_shake_amount, current_shake_amount)
 	v_offset = randf_range(-current_shake_amount, current_shake_amount)
+
+
+func get_bob_phase() -> float:
+	return _step_timer

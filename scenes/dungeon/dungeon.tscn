@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://c1s3u6ow1wnu4"]
 
 [ext_resource type="Script" uid="uid://byv767uyech2l" path="res://assets/scripts/dungeon/dungeon_generation.gd" id="1_pf7w1"]
+[ext_resource type="Script" uid="uid://dmfomgeeb5rya" path="res://assets/scripts/dungeon/dungeon.gd" id="1_sub6p"]
 
-[node name="Dungeon" type="Node3D" unique_id=852877014]
+[node name="Dungeon" type="Node3D" unique_id=852877014 node_paths=PackedStringArray("dungeon_generation")]
+script = ExtResource("1_sub6p")
+dungeon_generation = NodePath("DungeonGeneration")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=583073098]
+[node name="DungeonGeneration" type="CSGCombiner3D" parent="." unique_id=583073098]
 use_collision = true
 script = ExtResource("1_pf7w1")
+create_rooms = null

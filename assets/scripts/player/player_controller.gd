@@ -4,6 +4,7 @@ class_name PlayerController extends CharacterBody3D
 @export_category("References")
 @export var camera : CameraController
 @export var camera_effects : CameraEffects
+@export var weapon_controller : WeaponController
 @export var state_chart : StateChart
 @export var standing_collision : CollisionShape3D
 @export var interaction_raycast : RayCast3D

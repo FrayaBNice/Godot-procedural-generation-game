@@ -5,5 +5,9 @@
 
 [resource]
 script = ExtResource("1_580d7")
+damage = 10.0
+max_ammo = 200
+is_automatic = true
+projectile_speed = 0.0
 weapon_model = ExtResource("2_wt4ci")
-weapon_position = Vector3(0, -0.3, -0.3)
+weapon_position = Vector3(0, -0.245, -0.485)

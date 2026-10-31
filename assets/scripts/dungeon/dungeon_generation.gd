@@ -1,5 +1,5 @@
 @tool
-extends CSGCombiner3D
+class_name DungeonGeneration extends CSGCombiner3D
 
 @export var create_rooms : bool = false : set = set_rooms
 @export var create_hallways : bool = false : set = set_connect
