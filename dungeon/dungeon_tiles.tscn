@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://brf5gy3boemjl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjv3p"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjv3p"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgty8"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yd8yw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="DungeonTiles" type="Node3D" unique_id=1684332184]
+
+[node name="RoomTile" type="MeshInstance3D" parent="." unique_id=1493565327]
+mesh = SubResource("BoxMesh_hjv3p")
+
+[node name="HallwayTile" type="MeshInstance3D" parent="." unique_id=1834600416]
+mesh = SubResource("BoxMesh_hjv3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_hjv3p")
+
+[node name="DoorTile" type="MeshInstance3D" parent="." unique_id=1633420979]
+mesh = SubResource("BoxMesh_hjv3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_dgty8")
+
+[node name="BorderTile" type="MeshInstance3D" parent="." unique_id=579282764]
+mesh = SubResource("BoxMesh_hjv3p")
+surface_material_override/0 = SubResource("StandardMaterial3D_yd8yw")
