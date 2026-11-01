@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://b4nvpcvqie8nw" path="res://assets/weapons/scripts/weapon_state_machine.gd" id="22_oal2v"]
 [ext_resource type="Script" uid="uid://6i8bh8ih1g1c" path="res://assets/weapons/scripts/states/weapon_firing_state.gd" id="23_aoka8"]
 [ext_resource type="Script" uid="uid://bf5mplccn0nj4" path="res://assets/weapons/scripts/states/weapon_empty_state.gd" id="24_2xfig"]
+[ext_resource type="Script" uid="uid://q6taxeoleoa7" path="res://assets/scripts/components/health_component.gd" id="26_ii78e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ev2gv"]
 
@@ -48,6 +49,7 @@ offset_right = 372.0
 offset_bottom = 536.0
 grow_horizontal = 1
 grow_vertical = 1
+enabled = false
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="." unique_id=92505442]
@@ -232,6 +234,10 @@ script = ExtResource("23_aoka8")
 
 [node name="EmptyState" type="Node" parent="WeaponStateMachine" unique_id=317811889]
 script = ExtResource("24_2xfig")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1858165333]
+script = ExtResource("26_ii78e")
+metadata/_custom_type_script = "uid://q6taxeoleoa7"
 
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateMachine/MovementState/GroundedState/IdleState" method="_on_idle_state_processing"]

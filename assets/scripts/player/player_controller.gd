@@ -23,6 +23,12 @@ var _movement_velocity : Vector3 = Vector3.ZERO
 var sprint_modifier : float = 0.0
 var speed : float = 0.0
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("test"):
+		var health_component = get_node_or_null("HealthComponent")
+		if health_component:
+			health_component.take_damage(10.0)
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
