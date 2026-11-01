@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://dxmm4mk308gmb"]
+
+[ext_resource type="Script" uid="uid://bfd38rkhtai68" path="res://assets/weapons/scripts/weapon.gd" id="1_u2qcu"]
+[ext_resource type="PackedScene" uid="uid://cr1pardhdemlf" path="res://scenes/weapon/shotgun_weapon.tscn" id="2_vdv7n"]
+
+[resource]
+script = ExtResource("1_u2qcu")
+weapon_name = "Shotgun"
+damage = 10.0
+max_ammo = 50
+fire_rate = 1.0
+projectile_speed = 0.0
+weapon_model = ExtResource("2_vdv7n")
+pellet_count = 7
+spread_angle = 0.098
+metadata/_custom_type_script = "uid://bfd38rkhtai68"

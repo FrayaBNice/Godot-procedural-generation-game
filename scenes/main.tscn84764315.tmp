@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dcwi4hfli225"]
+
+[ext_resource type="Script" uid="uid://cm7imj7a2lioq" path="res://source/room/room.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dh8v00nh02l1" path="res://scenes/player/player_controller.tscn" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://c8jai25s8pi1f" path="res://source/room/room_generation.gd" id="3_tbgi4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hjv3p"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0xm2m"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="Environment" id="Environment_hjv3p"]
+background_mode = 1
+
+[node name="Main" type="Node" unique_id=241667543]
+
+[node name="UI" type="Control" parent="." unique_id=2104449091]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="World" type="Node" parent="." unique_id=1941272318]
+
+[node name="Room" type="Node3D" parent="World" unique_id=1891126630]
+script = ExtResource("1_sugp2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Room" unique_id=1750860653]
+mesh = SubResource("PlaneMesh_hjv3p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Room/MeshInstance3D" unique_id=1495601243]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Room/MeshInstance3D/StaticBody3D" unique_id=800955850]
+shape = SubResource("ConcavePolygonShape3D_0xm2m")
+
+[node name="RoomGeneration" type="Node" parent="World" unique_id=300497925]
+script = ExtResource("3_tbgi4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=1502174852]
+environment = SubResource("Environment_hjv3p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment" unique_id=1949734133]
+transform = Transform3D(1, 0, 0, 0, 0.610886, 0.79171854, 0, -0.79171854, 0.610886, 0, 5.8840313, 7.6890574)
+
+[node name="PlayerController" parent="World" unique_id=700695757 instance=ExtResource("2_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
