@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://be8kkcwtutqsu"]
 
 [ext_resource type="Script" uid="uid://q6taxeoleoa7" path="res://assets/scripts/components/health_component.gd" id="1_asx5d"]
-[ext_resource type="Script" uid="uid://ckaax6lg2ydgt" path="res://scenes/props/destructible_box.gd" id="1_rcyp1"]
+[ext_resource type="Script" uid="uid://ckaax6lg2ydgt" path="res://assets/scripts/environment/props/destructible_box.gd" id="1_rcyp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjv3p"]
 albedo_color = Color(0.47559005, 0.30203018, 9.62615e-08, 1)

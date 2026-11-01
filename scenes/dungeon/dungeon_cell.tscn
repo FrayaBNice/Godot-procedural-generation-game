@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://hoprs8xs1vu8"]
 
-[ext_resource type="Script" uid="uid://83mvfqh06pdn" path="res://dungeon/dungeon_cell.gd" id="1_rqcbf"]
-[ext_resource type="ArrayMesh" uid="uid://bi1vwlbx2xclv" path="res://assets/dungeon/models/Floor.res" id="1_v2obv"]
-[ext_resource type="ArrayMesh" uid="uid://c4tcjmavr5ryb" path="res://assets/dungeon/models/Ceiling.res" id="2_rqcbf"]
-[ext_resource type="ArrayMesh" uid="uid://cdnc1hq3piavc" path="res://assets/dungeon/models/WallUp.res" id="3_anxho"]
-[ext_resource type="ArrayMesh" uid="uid://jx0jf2vusxc5" path="res://assets/dungeon/models/WallRight.res" id="4_r7kda"]
-[ext_resource type="ArrayMesh" uid="uid://ctmdovbwqoxod" path="res://assets/dungeon/models/WallDown.res" id="5_erqt5"]
-[ext_resource type="ArrayMesh" uid="uid://uf8r0evlvyqs" path="res://assets/dungeon/models/WallLeft.res" id="6_o1u0n"]
-[ext_resource type="ArrayMesh" uid="uid://d273pvvlehh5q" path="res://assets/dungeon/models/DoorUp.res" id="7_wxjno"]
-[ext_resource type="ArrayMesh" uid="uid://roht16cxkepc" path="res://assets/dungeon/models/DoorRight.res" id="8_2ju8j"]
-[ext_resource type="ArrayMesh" uid="uid://df3ljybbmtull" path="res://assets/dungeon/models/DoorDown.res" id="9_gr3w3"]
-[ext_resource type="ArrayMesh" uid="uid://drepgu7ejmfay" path="res://assets/dungeon/models/DoorLeft.res" id="10_moym7"]
+[ext_resource type="Script" uid="uid://83mvfqh06pdn" path="res://assets/dungeon/scripts/dungeon_cell.gd" id="1_6rlge"]
+[ext_resource type="ArrayMesh" uid="uid://bi1vwlbx2xclv" path="res://assets/dungeon/models/Floor.res" id="2_08ule"]
+[ext_resource type="ArrayMesh" uid="uid://c4tcjmavr5ryb" path="res://assets/dungeon/models/Ceiling.res" id="3_g3mj3"]
+[ext_resource type="ArrayMesh" uid="uid://cdnc1hq3piavc" path="res://assets/dungeon/models/WallUp.res" id="4_580wt"]
+[ext_resource type="ArrayMesh" uid="uid://jx0jf2vusxc5" path="res://assets/dungeon/models/WallRight.res" id="5_kdst1"]
+[ext_resource type="ArrayMesh" uid="uid://ctmdovbwqoxod" path="res://assets/dungeon/models/WallDown.res" id="6_3rx0h"]
+[ext_resource type="ArrayMesh" uid="uid://uf8r0evlvyqs" path="res://assets/dungeon/models/WallLeft.res" id="7_igit6"]
+[ext_resource type="ArrayMesh" uid="uid://d273pvvlehh5q" path="res://assets/dungeon/models/DoorUp.res" id="8_qk47o"]
+[ext_resource type="ArrayMesh" uid="uid://roht16cxkepc" path="res://assets/dungeon/models/DoorRight.res" id="9_mbups"]
+[ext_resource type="ArrayMesh" uid="uid://df3ljybbmtull" path="res://assets/dungeon/models/DoorDown.res" id="10_v3sdm"]
+[ext_resource type="ArrayMesh" uid="uid://drepgu7ejmfay" path="res://assets/dungeon/models/DoorLeft.res" id="11_vr8tv"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v2obv"]
 data = PackedVector3Array(1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
@@ -43,11 +43,11 @@ data = PackedVector3Array(1, 0, -1, 1, 0, -0.75, 1, 2, -0.75, 1, 2, -0.75, 1, 2,
 data = PackedVector3Array(1, 0, -1, 1, 0, -0.75, 1, 2, -0.75, 1, 2, -0.75, 1, 2, -1, 1, 0, -1, 1, 0, 0.75, 1, 0, 1, 1, 2, 1, 1, 2, 1, 1, 2, 0.75, 1, 0, 0.75, 1, 2, -0.75, 1, 2, 0.75, 1, 3, 0.75, 1, 3, 1, 1, 3, 0.75, 1, 2, 0.75, 1, 2, 0.75, 1, 2, 1, 1, 3, 1, 1, 3, 0.75, 1, 3, -0.75, 1, 2, -0.75, 1, 2, -1, 1, 2, -0.75, 1, 3, -0.75, 1, 3, -0.75, 1, 3, -1, 1, 2, -1)
 
 [node name="DungeonCell" type="Node3D" unique_id=1722617386]
-script = ExtResource("1_rqcbf")
+script = ExtResource("1_6rlge")
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=416479219]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("1_v2obv")
+mesh = ExtResource("2_08ule")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1743317682]
 
@@ -56,7 +56,7 @@ shape = SubResource("ConcavePolygonShape3D_v2obv")
 
 [node name="Ceiling" type="MeshInstance3D" parent="." unique_id=107308744]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("2_rqcbf")
+mesh = ExtResource("3_g3mj3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ceiling" unique_id=1667625224]
 
@@ -65,7 +65,7 @@ shape = SubResource("ConcavePolygonShape3D_rqcbf")
 
 [node name="WallUp" type="MeshInstance3D" parent="." unique_id=736122540]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("3_anxho")
+mesh = ExtResource("4_580wt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallUp" unique_id=432831371]
 
@@ -74,7 +74,7 @@ shape = SubResource("ConcavePolygonShape3D_anxho")
 
 [node name="WallRight" type="MeshInstance3D" parent="." unique_id=149706186]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("4_r7kda")
+mesh = ExtResource("5_kdst1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallRight" unique_id=250240134]
 
@@ -83,7 +83,7 @@ shape = SubResource("ConcavePolygonShape3D_r7kda")
 
 [node name="WallDown" type="MeshInstance3D" parent="." unique_id=411376760]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("5_erqt5")
+mesh = ExtResource("6_3rx0h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallDown" unique_id=994830730]
 
@@ -92,7 +92,7 @@ shape = SubResource("ConcavePolygonShape3D_erqt5")
 
 [node name="WallLeft" type="MeshInstance3D" parent="." unique_id=64595951]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("6_o1u0n")
+mesh = ExtResource("7_igit6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WallLeft" unique_id=286174703]
 
@@ -101,7 +101,7 @@ shape = SubResource("ConcavePolygonShape3D_o1u0n")
 
 [node name="DoorUp" type="MeshInstance3D" parent="." unique_id=1497032329]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("7_wxjno")
+mesh = ExtResource("8_qk47o")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorUp" unique_id=1658746656]
 
@@ -110,7 +110,7 @@ shape = SubResource("ConcavePolygonShape3D_wxjno")
 
 [node name="DoorRight" type="MeshInstance3D" parent="." unique_id=2015914207]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("8_2ju8j")
+mesh = ExtResource("9_mbups")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorRight" unique_id=894901211]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -120,7 +120,7 @@ shape = SubResource("ConcavePolygonShape3D_2ju8j")
 
 [node name="DoorDown" type="MeshInstance3D" parent="." unique_id=90323476]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("9_gr3w3")
+mesh = ExtResource("10_v3sdm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorDown" unique_id=1320155235]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
@@ -130,7 +130,7 @@ shape = SubResource("ConcavePolygonShape3D_gr3w3")
 
 [node name="DoorLeft" type="MeshInstance3D" parent="." unique_id=1046195630]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-mesh = ExtResource("10_moym7")
+mesh = ExtResource("11_vr8tv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorLeft" unique_id=1644141971]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)

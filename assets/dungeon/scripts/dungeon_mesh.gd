@@ -9,7 +9,7 @@ func set_start(val : bool) -> void:
 	if Engine.is_editor_hint():
 		create_dungeon()
 
-var dungeon_cell_scene : PackedScene = preload("res://dungeon/dungeon_cell.tscn")
+var dungeon_cell_scene : PackedScene = preload("res://scenes/dungeon/dungeon_cell.tscn")
 
 var directions : Dictionary = {
 	"up" : Vector3i.FORWARD,
