@@ -1,13 +1,12 @@
 @tool
-extends Node3D
+class_name DungeonMesh extends Node3D
 
 @export var grid_map_path : NodePath
 @onready var grid_map : GridMap = get_node(grid_map_path)
 
 @export var start : bool = false : set = set_start
 func set_start(val : bool) -> void:
-	if Engine.is_editor_hint():
-		create_dungeon()
+	create_dungeon()
 
 var dungeon_cell_scene : PackedScene = preload("res://scenes/dungeon/dungeon_cell.tscn")
 
@@ -56,7 +55,7 @@ func create_dungeon():
 	for cell in grid_map.get_used_cells():
 		var cell_index : int = grid_map.get_cell_item(cell)
 		if cell_index <= 2 \
-		&& cell_index >= 0:
+		and cell_index >= 0:
 			var dungeon_cell : Node3D = dungeon_cell_scene.instantiate()
 			dungeon_cell.position = Vector3(cell) * 2 + Vector3(1, 0, 1)
 			add_child(dungeon_cell)
@@ -65,7 +64,7 @@ func create_dungeon():
 				var cell_n : Vector3i = cell + directions.values()[i]
 				var cell_n_index : int = grid_map.get_cell_item(cell_n)
 				if cell_n_index == -1 \
-				|| cell_n_index == 3:
+				or cell_n_index == 3:
 					handle_none(dungeon_cell, directions.keys()[i])
 				else:
 					var key : String = str(cell_index) + str(cell_n_index)

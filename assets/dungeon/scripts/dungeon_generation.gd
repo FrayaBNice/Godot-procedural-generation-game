@@ -1,42 +1,53 @@
 @tool
-extends Node3D
+class_name DungeonGeneration extends Node3D
 
-@onready var grid_map: GridMap = $GridMap
+@onready var grid_map_dungeon : GridMap = $GridMapDungeon
+@onready var grid_map_entities : GridMap = $GridMapEntities
 
 @export var start : bool = false : set = set_start
 func set_start(val : bool) -> void:
-	if Engine.is_editor_hint():
-		generate()
-
+	generate()
+@export_category("Dungeon Settings")
 @export var border_size : int = 20 : set = set_border_size
 func set_border_size(val : int) -> void:
 	border_size = val
 	if Engine.is_editor_hint():
 		visualize_border()
-
 @export_multiline var custom_seed : String = "" : set = set_seed
 func set_seed(val : String) -> void:
 	custom_seed = val
 	seed(val.hash())
-
 @export_range(0, 1) var survival_chance : float = 0.25
 @export var room_amount : int = 4
 @export var room_margin : int = 1
 @export var room_recursion : int = 15
 @export var min_room_size : int = 2
 @export var max_room_size : int = 4
+@export var max_enemies : int = 5
+@export var max_ammo_pickups : int = 10
+@export var ammo_recursion : int = 15
+@export_category("References")
+@export var dungeon_mesh : DungeonMesh
 
 var room_tiles : Array[PackedVector3Array] = []
 var room_positions : PackedVector3Array = []
 
+
+func _ready() -> void:
+	grid_map_dungeon.clear()
+	generate()
+	dungeon_mesh.create_dungeon()
+
+
 func visualize_border():
-	grid_map.clear()
+	grid_map_dungeon.clear()
+	grid_map_entities.clear()
 	
 	for i in range(-1, border_size + 1):
-		grid_map.set_cell_item(Vector3i(i, 0, -1), 3)
-		grid_map.set_cell_item(Vector3i(i, 0, border_size), 3)
-		grid_map.set_cell_item(Vector3i(border_size, 0, i), 3)
-		grid_map.set_cell_item(Vector3i(-1, 0, i), 3)
+		grid_map_dungeon.set_cell_item(Vector3i(i, 0, -1), 3)
+		grid_map_dungeon.set_cell_item(Vector3i(i, 0, border_size), 3)
+		grid_map_dungeon.set_cell_item(Vector3i(border_size, 0, i), 3)
+		grid_map_dungeon.set_cell_item(Vector3i(-1, 0, i), 3)
 
 
 func generate():
@@ -44,7 +55,8 @@ func generate():
 	room_positions.clear()
 	if custom_seed : set_seed(custom_seed)
 	
-	visualize_border()
+	if Engine.is_editor_hint():
+		visualize_border()
 	
 	for i in room_amount:
 		make_room(room_recursion)
@@ -74,7 +86,7 @@ func generate():
 		var possible_connections : Array[PackedInt32Array] = []
 		for vp in visited_points:
 			for c in del_graph.get_point_connections(vp):
-				if ! visited_points.has(c):
+				if not visited_points.has(c):
 					var connection : PackedInt32Array = [vp, c]
 					possible_connections.append(connection)
 					
@@ -98,10 +110,16 @@ func generate():
 					hallway_graph.connect_points(p, c)
 						
 		create_hallways(hallway_graph)
+	
+	for i in max_enemies:
+		make_enemies()
+	
+	for i in max_ammo_pickups:
+		make_ammo(ammo_recursion)
 
 
 func make_room(recursion : int):
-	if ! recursion > 0:
+	if not recursion > 0:
 		return
 		
 	var width : int = randi_range(min_room_size, max_room_size)
@@ -114,7 +132,7 @@ func make_room(recursion : int):
 	for r in range(-room_margin, height + room_margin):
 		for c in range(-room_margin, width + room_margin):
 			var pos : Vector3i = starting_pos + Vector3i(c, 0, r)
-			if grid_map.get_cell_item(pos) == 0:
+			if grid_map_dungeon.get_cell_item(pos) == 0:
 				make_room(recursion-1)
 				return
 	
@@ -122,7 +140,7 @@ func make_room(recursion : int):
 	for r in height:
 		for c in width:
 			var pos : Vector3i = starting_pos + Vector3i(c, 0, r)
-			grid_map.set_cell_item(pos, 0)
+			grid_map_dungeon.set_cell_item(pos, 0)
 			room.append(pos)
 	room_tiles.append(room)
 	
@@ -130,6 +148,24 @@ func make_room(recursion : int):
 	var avg_z : float = starting_pos.z + (float(height) / 2)
 	var pos : Vector3 = Vector3(avg_x, 0, avg_z)
 	room_positions.append(pos)
+
+
+func make_enemies():
+	var rand_room : Array = room_tiles[randi_range(1, room_tiles.size() - 1)]
+	var rand_tile : Vector3i = rand_room[randi_range(0, rand_room.size() - 1)]
+	grid_map_entities.set_cell_item(rand_tile, 4)
+
+func make_ammo(recursion : int):
+	if not recursion > 0:
+		return
+	
+	var rand_room : Array = room_tiles[randi_range(1, room_tiles.size() - 1)]
+	var rand_tile : Vector3i = rand_room[randi_range(0, rand_room.size() - 1)]
+	if grid_map_entities.get_cell_item(rand_tile) == 0:
+		make_ammo(recursion - 1)
+	else:
+		grid_map_entities.set_cell_item(rand_tile, randi_range(5, 7))
+
 
 func create_hallways(hallway_graph : AStar2D):
 	var hallways : Array[PackedVector3Array] = []
@@ -151,8 +187,8 @@ func create_hallways(hallway_graph : AStar2D):
 						tile_to = t
 				var hallway : PackedVector3Array = [tile_from, tile_to]
 				hallways.append(hallway)
-				grid_map.set_cell_item(tile_from,2)
-				grid_map.set_cell_item(tile_to,2)
+				grid_map_dungeon.set_cell_item(tile_from,2)
+				grid_map_dungeon.set_cell_item(tile_to,2)
 	
 	var astar : AStarGrid2D = AStarGrid2D.new()
 	astar.size = Vector2i.ONE * border_size
@@ -160,7 +196,7 @@ func create_hallways(hallway_graph : AStar2D):
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	
-	for t in grid_map.get_used_cells_by_item(0):
+	for t in grid_map_dungeon.get_used_cells_by_item(0):
 		astar.set_point_solid(Vector2i(t.x, t.z))
 	
 	for h in hallways:
@@ -170,5 +206,5 @@ func create_hallways(hallway_graph : AStar2D):
 		
 		for t in hall:
 			var pos : Vector3i = Vector3i(t.x, 0, t.y)
-			if grid_map.get_cell_item(pos) < 0:
-				grid_map.set_cell_item(pos, 1)
+			if grid_map_dungeon.get_cell_item(pos) < 0:
+				grid_map_dungeon.set_cell_item(pos, 1)

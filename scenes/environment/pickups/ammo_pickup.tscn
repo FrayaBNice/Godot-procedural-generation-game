@@ -9,9 +9,14 @@ bottom_radius = 0.25
 height = 0.25
 
 [node name="AmmoPickup" unique_id=2075187270 instance=ExtResource("1_e701s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_bp42o")
 weapon_slot = 1
 ammo_amount = 10
 
+[node name="CollisionShape3D" parent="." index="0" unique_id=1357119035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+
 [node name="MeshInstance3D" parent="." index="1" unique_id=624650306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 mesh = SubResource("CylinderMesh_rpsyy")

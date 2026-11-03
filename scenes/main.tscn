@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://gt6xvoj2mc23" path="res://scenes/UI/user_interface.tscn" id="3_sugp2"]
 [ext_resource type="Resource" uid="uid://dj6txee8y8mvu" path="res://assets/weapons/resources/shotgun_data.tres" id="4_ya4ey"]
 [ext_resource type="Resource" uid="uid://cpwtcinssi2w5" path="res://assets/weapons/resources/machine_gun_data.tres" id="5_eb6dy"]
-[ext_resource type="Script" uid="uid://bqg4x34gjox38" path="res://assets/scripts/systems/dungeon_manager.gd" id="7_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://c0dv1wuldqqwv" path="res://scenes/dungeon/dungeon_generation.tscn" id="8_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://ckhtu0jf7k7ai" path="res://scenes/environment/pickups/weapon_pickup.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://ycsrbvtgbpd1" path="res://scenes/environment/world_environment.tscn" id="10_ya4ey"]
 [ext_resource type="Resource" uid="uid://dxmm4mk308gmb" path="res://assets/weapons/resources/shotgun.tres" id="11_eb6dy"]
@@ -67,10 +67,10 @@ weapons = Dictionary[int, ExtResource("2_85g3d")]({
 })
 player = NodePath("../../CurrentLevel/PlayerController")
 
-[node name="DungeonManager" type="Node" parent="Managers" unique_id=1100918063]
-script = ExtResource("7_a8y0u")
-
 [node name="CurrentLevel" type="Node3D" parent="." unique_id=151068404]
+
+[node name="DungeonGeneration" parent="CurrentLevel" unique_id=221985120 instance=ExtResource("8_jbj1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 
 [node name="TestingSpace" type="Node3D" parent="CurrentLevel" unique_id=1891126630]
 

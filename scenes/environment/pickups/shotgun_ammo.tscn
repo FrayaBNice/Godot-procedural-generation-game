@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dyai6c7i6otgn"]
+
+[ext_resource type="PackedScene" uid="uid://cwyfa7ohxsew1" path="res://scenes/environment/pickups/ammo_pickup.tscn" id="1_wmsoj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgx8a"]
+albedo_color = Color(0.735357, 0.5370987, 0.5370987, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gh2rf"]
+material = SubResource("StandardMaterial3D_wgx8a")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.25
+
+[node name="ShotgunAmmo" unique_id=2075187270 instance=ExtResource("1_wmsoj")]
+weapon_slot = 2
+ammo_amount = 4
+
+[node name="MeshInstance3D" parent="." index="1" unique_id=624650306]
+mesh = SubResource("CylinderMesh_gh2rf")
