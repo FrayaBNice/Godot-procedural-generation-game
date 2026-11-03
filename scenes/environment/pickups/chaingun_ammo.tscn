@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://gi2o8g8tx0y"]
+
+[ext_resource type="PackedScene" uid="uid://cwyfa7ohxsew1" path="res://scenes/environment/pickups/ammo_pickup.tscn" id="1_ejv32"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2mnn"]
+albedo_color = Color(0.5370987, 0.5370987, 0.735357, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_go1g3"]
+material = SubResource("StandardMaterial3D_a2mnn")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.25
+
+[node name="ChaingunAmmo" unique_id=2075187270 instance=ExtResource("1_ejv32")]
+weapon_slot = 3
+ammo_amount = 25
+
+[node name="MeshInstance3D" parent="." index="1" unique_id=624650306]
+mesh = SubResource("CylinderMesh_go1g3")

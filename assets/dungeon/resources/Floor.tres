@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d0edta01i4dx7"]
+
+[resource]
+resource_name = "Floor"
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.21960786, 0.21960786, 0.21960786, 1)

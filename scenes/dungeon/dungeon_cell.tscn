@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://hoprs8xs1vu8"]
+
+[ext_resource type="Script" uid="uid://83mvfqh06pdn" path="res://assets/dungeon/scripts/dungeon_cell.gd" id="1_6rlge"]
+[ext_resource type="ArrayMesh" uid="uid://bi1vwlbx2xclv" path="res://assets/dungeon/models/Floor.res" id="2_08ule"]
+[ext_resource type="ArrayMesh" uid="uid://c4tcjmavr5ryb" path="res://assets/dungeon/models/Ceiling.res" id="3_g3mj3"]
+[ext_resource type="ArrayMesh" uid="uid://cdnc1hq3piavc" path="res://assets/dungeon/models/WallUp.res" id="4_580wt"]
+[ext_resource type="ArrayMesh" uid="uid://jx0jf2vusxc5" path="res://assets/dungeon/models/WallRight.res" id="5_kdst1"]
+[ext_resource type="ArrayMesh" uid="uid://ctmdovbwqoxod" path="res://assets/dungeon/models/WallDown.res" id="6_3rx0h"]
+[ext_resource type="ArrayMesh" uid="uid://uf8r0evlvyqs" path="res://assets/dungeon/models/WallLeft.res" id="7_igit6"]
+[ext_resource type="ArrayMesh" uid="uid://d273pvvlehh5q" path="res://assets/dungeon/models/DoorUp.res" id="8_qk47o"]
+[ext_resource type="ArrayMesh" uid="uid://roht16cxkepc" path="res://assets/dungeon/models/DoorRight.res" id="9_mbups"]
+[ext_resource type="ArrayMesh" uid="uid://df3ljybbmtull" path="res://assets/dungeon/models/DoorDown.res" id="10_v3sdm"]
+[ext_resource type="ArrayMesh" uid="uid://drepgu7ejmfay" path="res://assets/dungeon/models/DoorLeft.res" id="11_vr8tv"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v2obv"]
+data = PackedVector3Array(1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6rlge"]
+size = Vector3(0.010000169, 3, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08ule"]
+size = Vector3(2, 3, 0.010000348)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g3mj3"]
+size = Vector3(0.010000467, 3, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_580wt"]
+size = Vector3(2, 3, 0.010000169)
+
+[node name="DungeonCell" type="Node3D" unique_id=1722617386]
+script = ExtResource("1_6rlge")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=416479219]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("2_08ule")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1743317682]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=325313051]
+shape = SubResource("ConcavePolygonShape3D_v2obv")
+
+[node name="Ceiling" type="MeshInstance3D" parent="." unique_id=107308744]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("3_g3mj3")
+
+[node name="WallUp" type="MeshInstance3D" parent="." unique_id=736122540]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("4_580wt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallUp" unique_id=847978008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.995, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallUp/StaticBody3D" unique_id=56419916]
+shape = SubResource("BoxShape3D_6rlge")
+
+[node name="WallRight" type="MeshInstance3D" parent="." unique_id=149706186]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("5_kdst1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallRight" unique_id=734008141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9604645e-08, 1.5, 0.99500006)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallRight/StaticBody3D" unique_id=1963058340]
+shape = SubResource("BoxShape3D_08ule")
+
+[node name="WallDown" type="MeshInstance3D" parent="." unique_id=411376760]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("6_3rx0h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallDown" unique_id=1231763320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995, 1.5, 1.7881393e-07)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallDown/StaticBody3D" unique_id=168997303]
+shape = SubResource("BoxShape3D_g3mj3")
+
+[node name="WallLeft" type="MeshInstance3D" parent="." unique_id=64595951]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("7_igit6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallLeft" unique_id=1076489455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.995)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallLeft/StaticBody3D" unique_id=1676454790]
+shape = SubResource("BoxShape3D_580wt")
+
+[node name="DoorUp" type="MeshInstance3D" parent="." unique_id=1497032329]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("8_qk47o")
+
+[node name="DoorRight" type="MeshInstance3D" parent="." unique_id=2015914207]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("9_mbups")
+
+[node name="DoorDown" type="MeshInstance3D" parent="." unique_id=90323476]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("10_v3sdm")
+
+[node name="DoorLeft" type="MeshInstance3D" parent="." unique_id=1046195630]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("11_vr8tv")

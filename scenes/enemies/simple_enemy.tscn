@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bn20pblv5cjo6"]
+
+[ext_resource type="Script" uid="uid://dd3p3tpaki7qh" path="res://assets/scripts/enemies/simple_enemy.gd" id="1_xmblk"]
+[ext_resource type="Script" uid="uid://q6taxeoleoa7" path="res://assets/scripts/components/health_component.gd" id="2_ckuuk"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_du441"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_3xgoc"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_qoi0b"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_og8kw"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="7_ho7jy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgty8"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjv3p"]
+material = SubResource("StandardMaterial3D_dgty8")
+size = Vector3(1, 2, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hjv3p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hjv3p"]
+radius = 6.0
+
+[node name="SimpleEnemy" type="CharacterBody3D" unique_id=1711430094]
+script = ExtResource("1_xmblk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2016582153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_hjv3p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2033174920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hjv3p")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1363285961]
+script = ExtResource("2_ckuuk")
+max_health = 50.0
+metadata/_custom_type_script = "uid://q6taxeoleoa7"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1700734219]
+target_desired_distance = 2.0
+path_height_offset = 0.25
+avoidance_enabled = true
+radius = 0.75
+debug_enabled = true
+
+[node name="StateChart" type="Node" parent="." unique_id=1601973877]
+script = ExtResource("3_du441")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=584118326]
+script = ExtResource("4_3xgoc")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root" unique_id=570447131]
+script = ExtResource("5_qoi0b")
+
+[node name="Follow" type="Node" parent="StateChart/Root" unique_id=1752235487]
+script = ExtResource("5_qoi0b")
+
+[node name="Attack" type="Node" parent="StateChart/Root" unique_id=1350202251]
+script = ExtResource("5_qoi0b")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root" unique_id=195520628]
+script = ExtResource("6_og8kw")
+to = NodePath("../Idle")
+event = &"toIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToFollow" type="Node" parent="StateChart/Root" unique_id=1214544569]
+script = ExtResource("6_og8kw")
+to = NodePath("../Follow")
+event = &"toFollow"
+delay_in_seconds = "0.0"
+
+[node name="ToAttack" type="Node" parent="StateChart/Root" unique_id=1120707101]
+script = ExtResource("6_og8kw")
+to = NodePath("../Attack")
+event = &"toAttack"
+delay_in_seconds = "0.0"
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=595011907]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1380885701]
+shape = SubResource("SphereShape3D_hjv3p")
+
+[node name="StateChartDebugger" parent="." unique_id=393713336 instance=ExtResource("7_ho7jy")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 372.0
+offset_bottom = 536.0
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../StateChart")
+
+[connection signal="state_physics_processing" from="StateChart/Root/Follow" to="." method="_on_follow_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Attack" to="." method="_on_attack_state_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

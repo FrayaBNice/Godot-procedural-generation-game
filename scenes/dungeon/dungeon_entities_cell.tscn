@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cqwmm300ihcka"]
+
+[ext_resource type="PackedScene" uid="uid://bn20pblv5cjo6" path="res://scenes/enemies/simple_enemy.tscn" id="1_ewy3b"]
+[ext_resource type="PackedScene" uid="uid://bomyd5qoyuk63" path="res://scenes/environment/pickups/pistol_ammo.tscn" id="2_4ac8p"]
+[ext_resource type="PackedScene" uid="uid://dyai6c7i6otgn" path="res://scenes/environment/pickups/shotgun_ammo.tscn" id="3_3nq24"]
+[ext_resource type="PackedScene" uid="uid://gi2o8g8tx0y" path="res://scenes/environment/pickups/chaingun_ammo.tscn" id="4_d8qf3"]
+
+[node name="DungeonEntitiesCell" type="Node3D" unique_id=1507975514]
+
+[node name="SimpleEnemy" parent="." unique_id=1711430094 instance=ExtResource("1_ewy3b")]
+
+[node name="PistolAmmo" parent="." unique_id=2075187270 instance=ExtResource("2_4ac8p")]
+
+[node name="ShotgunAmmo" parent="." unique_id=1219110714 instance=ExtResource("3_3nq24")]
+
+[node name="ChaingunAmmo" parent="." unique_id=1509912308 instance=ExtResource("4_d8qf3")]
