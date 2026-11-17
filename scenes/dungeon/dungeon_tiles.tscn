@@ -33,10 +33,24 @@ albedo_color = Color(0.7373294, 0.5370987, 0.5370987, 1)
 material = SubResource("StandardMaterial3D_5juya")
 size = Vector3(2, 2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cnrc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_benn7"]
 albedo_color = Color(0.5370987, 0.5370987, 0.735357, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dlapd"]
+material = SubResource("StandardMaterial3D_benn7")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftvwo"]
+albedo_color = Color(0, 0.5370987, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lyuho"]
+material = SubResource("StandardMaterial3D_ftvwo")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cnrc"]
+albedo_color = Color(0, 0.24780053, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_axkjy"]
 material = SubResource("StandardMaterial3D_0cnrc")
 size = Vector3(2, 2, 2)
 
@@ -68,3 +82,9 @@ mesh = SubResource("BoxMesh_yvqqb")
 
 [node name="ChaingunAmmoTile" type="MeshInstance3D" parent="." unique_id=474003379]
 mesh = SubResource("BoxMesh_dlapd")
+
+[node name="EntranceElevatorTile" type="MeshInstance3D" parent="." unique_id=438314472]
+mesh = SubResource("BoxMesh_lyuho")
+
+[node name="ExitElevatorTile" type="MeshInstance3D" parent="." unique_id=416324631]
+mesh = SubResource("BoxMesh_axkjy")

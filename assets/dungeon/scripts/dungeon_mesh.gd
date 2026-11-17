@@ -5,7 +5,7 @@ class_name DungeonMesh extends Node3D
 @onready var grid_map : GridMap = get_node(grid_map_path)
 
 @export var start : bool = false : set = set_start
-func set_start(val : bool) -> void:
+func set_start(_val : bool) -> void:
 	create_dungeon()
 
 var dungeon_cell_scene : PackedScene = preload("res://scenes/dungeon/dungeon_cell.tscn")

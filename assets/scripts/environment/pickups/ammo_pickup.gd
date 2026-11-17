@@ -4,7 +4,7 @@ class_name AmmoPickup extends PickupBase
 @export var ammo_amount : int = 10
 
 
-func can_pickup(player : PlayerController) -> bool:
+func can_pickup(_player : PlayerController) -> bool:
 	if weapon_slot not in Managers.weapon_manager.weapons:
 		return false
 	
@@ -13,7 +13,7 @@ func can_pickup(player : PlayerController) -> bool:
 	return weapon_data.unlocked and weapon_data.ammo < weapon_data.weapon.max_ammo
 
 
-func apply_pickup(player : PlayerController) -> void:
+func apply_pickup(_player : PlayerController) -> void:
 	var weapon_data = Managers.weapon_manager.weapons[weapon_slot]
 	var space_available = weapon_data.weapon.max_ammo - weapon_data.ammo
 	var ammo_to_add = min(ammo_amount, space_available)

@@ -14,8 +14,8 @@ func _on_pickup(body : Node3D) -> void:
 		queue_free()
 
 
-func can_pickup(player : PlayerController) -> bool:
+func can_pickup(_player : PlayerController) -> bool:
 	return true
 
-func apply_pickup(player : PlayerController) -> void:
+func apply_pickup(_player : PlayerController) -> void:
 	pass

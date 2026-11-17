@@ -14,7 +14,9 @@
 [ext_resource type="Resource" uid="uid://dxmm4mk308gmb" path="res://assets/weapons/resources/shotgun.tres" id="11_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://be8kkcwtutqsu" path="res://scenes/props/destructible_box.tscn" id="11_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://cwyfa7ohxsew1" path="res://scenes/environment/pickups/ammo_pickup.tscn" id="11_trceg"]
+[ext_resource type="Script" uid="uid://d35sloqu60cv6" path="res://assets/scripts/environment/trigger_volume.gd" id="15_muem4"]
 [ext_resource type="PackedScene" uid="uid://bn20pblv5cjo6" path="res://scenes/enemies/simple_enemy.tscn" id="16_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://d1md2hkdejtql" path="res://scenes/elevator/elevator.tscn" id="16_muem4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hjv3p"]
 vertices = PackedVector3Array(-1.25, 0, -11.25, -1, 0, -13, -2.75, 0, -13.25, -9.5, 0, -11, -2.75, 0, -15, -1, 0, -15.25, -1.25, 0, -19.5, -9.5, 0, -19.5, 7, 0, -15.25, 7.25, 0, -14, 9.5, 0, -14, 9.5, 0, -19.5, 7, 0, -13, 7, 0, -7.25, 9.5, 0, -5.25, 7, 0, -5.25, 5.25, 0, -13, 5.25, 0, -7.5, 0.5, 0, -11, 0.5, 0, -9.25, 0, 0, -9, 4.75, 0, -7, -5, 0, 4.5, -5.25, 0, 6.75, 3.5, 0, 7.5, 4.75, 0, 5.5, -9.5, 0, -9.25, -9, 0, 3, -6.25, 0, 3, -9.5, 0, 3.5, 6, 5.5, 6.5, 5.75, 5.5, -6.5, 5.75, 5.5, 6, 5.25, 5.5, 6.5, 5.25, 5.5, 7, 7, 0, 5.25, 9.5, 0, 5.25, -6.75, 5, 7, -6, 5, 6, -6, 5, 5, -9, 5, 6.5, -7.75, 5, 7.25, -8.5, 5, 4, -9.25, 5, 5, -6.75, 5, 4, -9, 0, 5.25, -8.25, 0, 6.75, -7, 0, 6.75, -6.25, 0, 5.75, -7, 0, 4.25, -8.25, 0, 4.25, 7, 0, 7.25, 2.75, 0, 14, 1.75, 0, 14.25, 1.75, 0, 19.5, 6, 0, 7.75, 9.5, 0, 19.5, 0.5, 0, 13.75, 0.5, 0, 12.5, -7, 0, 8.25, -8.25, 0, 8.25, -9.5, 0, 7.5, -9.5, 0, 19.5, 4, 5.5, 8.5, 4, 5.5, 9, 4.5, 5.5, 8.75, 4.5, 5.5, 8.25)
@@ -51,12 +53,16 @@ size = Vector3(1, 6.1436768, 8.736206)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jbj1t"]
 size = Vector3(1, 6.1436768, 8.736206)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dp3eg"]
+size = Vector3(3, 3, 3)
+
 [node name="Main" type="Node" unique_id=241667543]
 
 [node name="Managers" type="Node" parent="." unique_id=632778016]
 
-[node name="GameManager" type="Node" parent="Managers" unique_id=2126540789]
+[node name="GameManager" type="Node" parent="Managers" unique_id=2126540789 node_paths=PackedStringArray("dungeon_generation")]
 script = ExtResource("1_trceg")
+dungeon_generation = NodePath("../../CurrentLevel/DungeonGeneration")
 
 [node name="WeaponManager" type="Node" parent="Managers" unique_id=556186323 node_paths=PackedStringArray("player")]
 script = ExtResource("1_tipki")
@@ -152,6 +158,20 @@ shape = SubResource("BoxShape3D_jbj1t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4648352, -1, -8.075761)
 
 [node name="PlayerController" parent="CurrentLevel" unique_id=700695757 groups=["player"] instance=ExtResource("2_jyhfs")]
+
+[node name="Elevator" parent="CurrentLevel" unique_id=1051135919 instance=ExtResource("16_muem4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0518093, 0, 15.88583)
+
+[node name="TriggerVolume" type="Area3D" parent="CurrentLevel" unique_id=855191607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15931892, 16.698826)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("15_muem4")
+targets = Array[String](["elevator"])
+metadata/_custom_type_script = "uid://d35sloqu60cv6"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurrentLevel/TriggerVolume" unique_id=238124959]
+shape = SubResource("BoxShape3D_dp3eg")
 
 [node name="UserInterface" parent="." unique_id=1467162206 instance=ExtResource("3_sugp2")]
 

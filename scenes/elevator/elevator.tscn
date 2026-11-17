@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d1md2hkdejtql"]
+
+[ext_resource type="Script" uid="uid://w0eoipw1vd6q" path="res://assets/scripts/elevator/elevator.gd" id="1_21fob"]
+[ext_resource type="Script" uid="uid://r8adw8wblgit" path="res://assets/scripts/components/triggerable_component.gd" id="3_8ved2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjv3p"]
+
+[node name="Elevator" type="Node3D" unique_id=1051135919]
+script = ExtResource("1_21fob")
+
+[node name="TriggerableComponent" type="Node" parent="." unique_id=1485422262]
+script = ExtResource("3_8ved2")
+targetname = "elevator"
+metadata/_custom_type_script = "uid://r8adw8wblgit"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=491028592]
+mesh = SubResource("BoxMesh_hjv3p")

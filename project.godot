@@ -40,6 +40,7 @@ folder_colors={
 
 player=""
 geometry=""
+dungeon=""
 
 [input]
 

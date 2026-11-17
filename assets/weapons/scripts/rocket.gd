@@ -24,7 +24,7 @@ func _on_body_entered(body : Node3D) -> void:
 	queue_free()
 
 
-func _spawn_impact_marker(position : Vector3) -> void:
+func _spawn_impact_marker(pos : Vector3) -> void:
 	var marker = MeshInstance3D.new()
 	var box = BoxMesh.new()
 	box.size = Vector3(0.1, 0.1, 0.1)
@@ -35,6 +35,6 @@ func _spawn_impact_marker(position : Vector3) -> void:
 	marker.set_surface_override_material(0, material)
 	
 	get_tree().current_scene.add_child(marker)
-	marker.global_position = position
+	marker.global_position = pos
 	
 	get_tree().create_timer(2.0).timeout.connect(marker.queue_free)

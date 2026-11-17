@@ -1,6 +1,6 @@
 extends WeaponState
 
-func _on_idle_state_processing(delta: float) -> void:
+func _on_idle_state_processing(_delta: float) -> void:
 	if not weapon_controller:
 		return
 	

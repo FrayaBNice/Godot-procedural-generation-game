@@ -4,6 +4,7 @@ class_name SimpleEnemy extends Enemy
 @onready var state_chart : StateChart = $StateChart
 @onready var health_component : HealthComponent = $HealthComponent
 @onready var mesh_instance : MeshInstance3D = $MeshInstance3D
+@onready var triggerable : TriggerableComponent = $TriggerableComponent
 
 @export var follow_speed : float = 3.0
 @export var melee_range : float = 2.0
@@ -29,6 +30,13 @@ func _physics_process(delta: float) -> void:
 func on_triggered() -> void:
 	state_chart.send_event("toFollow")
 
+
+func get_target_name() -> String:
+	return triggerable.targetname if triggerable else ""
+
+
+func on_trigger(player) -> void:
+	state_chart.send_event("toFollow")
 
 func _on_died() -> void:
 	queue_free()

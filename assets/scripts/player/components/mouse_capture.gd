@@ -23,5 +23,5 @@ func _ready() -> void:
 	Input.mouse_mode = current_mouse_mode
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_mouse_input = Vector2.ZERO

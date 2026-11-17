@@ -25,9 +25,10 @@ var speed : float = 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
-		var health_component = get_node_or_null("HealthComponent")
-		if health_component:
-			health_component.take_damage(10.0)
+		Managers.game_manager._load_new_floor()
+		#var health_component = get_node_or_null("HealthComponent")
+		#if health_component:
+			#health_component.take_damage(10.0)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

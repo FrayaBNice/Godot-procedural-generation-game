@@ -15,7 +15,7 @@ var _rotation : Vector3
 const DEFAULT_HEIGHT : float = 0.5
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_camera_rotation(component_mouse_capture._mouse_input)
 
 

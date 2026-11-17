@@ -3,7 +3,7 @@ extends RayCast3D
 var current_object
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 		
 	if is_colliding():
 		var object = get_collider()
